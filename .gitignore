@@ -1,2 +1,6 @@
 venv
 .idea
+.pytest_cache
+captcha_sovler.egg-info
+__pycache__/
+*.py[cod]
