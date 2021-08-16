@@ -22,3 +22,11 @@ class LetterStore:
                     self.letter_pixels[letter_name].append(read_image(letter_file))
                 else:
                     self.letter_pixels[letter_name] = [read_image(letter_file)]
+
+    def get_letters(self):
+        return list(self.letter_pixels.keys())
+
+    def get_images(self, letter: str):
+        if letter not in self.letter_pixels:
+            raise ValueError(f"There are no pixel matrices for the letter {letter}")
+        return self.letter_pixels[letter]
