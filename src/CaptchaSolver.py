@@ -33,7 +33,7 @@ class CaptchaSolver:
         most_relevant_positions = all_positions[0: self.letters_per_captcha]
         sorted_by_x_offset = sorted(most_relevant_positions, key=lambda x:  x[1])
         captcha_string = functools.reduce(lambda reduced_value, position: reduced_value + position[2],
-                                          sorted_by_x_offset, initial="")
+                                          sorted_by_x_offset, "")
         return captcha_string
 
     def _find_useful_differences_positions(self, raw_differences: DifferencePositionList, letter_width: int):
