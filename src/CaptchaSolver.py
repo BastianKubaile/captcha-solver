@@ -2,7 +2,7 @@ import functools
 from multiprocessing import Process
 from src.ImageReader import read_image
 from src.LetterStore import LetterStore
-from src.DifferenceCalculator import get_differences, DifferencePositionList
+from src.DifferenceCalculator import DifferenceCalculator, DifferencePositionList
 from typing import List, Tuple, Dict
 
 LetterFits = Tuple[float, int, str]
@@ -16,6 +16,7 @@ class CaptchaSolver:
                  possible_letter_duplicates_per_captcha: int = 2,
                  processes_to_use: int = 4):
         self.letter_store: LetterStore = letter_store
+        self.difference_calculator = DifferenceCalculator()
         self.possible_duplicates: int = possible_letter_duplicates_per_captcha
         self.letters_per_captcha: int = letters_per_captcha
         self.processes_to_use: int = processes_to_use
@@ -37,6 +38,7 @@ class CaptchaSolver:
             process.start()
         for process in processes:
             process.join()
+
         #TODO: Get return values of each process
         most_relevant_positions = all_positions[0: self.letters_per_captcha]
         sorted_by_x_offset = sorted(most_relevant_positions, key=lambda x:  x[1])
@@ -49,7 +51,8 @@ class CaptchaSolver:
         for letter in letters.keys():
             all_differences: DifferencePositionList = []
             for letter_image in letters[letter]:
-                all_differences = sorted(get_differences(captcha_image, letter_image) + all_differences)
+                current_differences = self.difference_calculator.get_differences(captcha_image, letter_image)
+                all_differences = sorted(current_differences + all_differences)
             useful_positions = self._find_useful_differences_positions(all_differences, letter_image.shape[1])
             to_append: List[LetterFits] = list(map(lambda x: (x[0], x[1], letter), useful_positions))
             all_positions = sorted(to_append + all_positions)
