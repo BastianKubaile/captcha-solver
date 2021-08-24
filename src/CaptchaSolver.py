@@ -4,17 +4,20 @@ from src.ImageReader import read_image
 from src.LetterStore import LetterStore
 from src.DifferenceCalculator import DifferenceCalculator, DifferencePositionList
 from typing import List, Tuple, Dict
+import yaml
 
 LetterFits = Tuple[float, int, str]
+
+config = yaml.safe_load(open("../config.yml"))
 
 
 class CaptchaSolver:
 
     def __init__(self,
                  letter_store: LetterStore,
-                 letters_per_captcha: int = 6,
-                 possible_letter_duplicates_per_captcha: int = 2,
-                 processes_to_use: int = 4):
+                 letters_per_captcha: int = config['LettersPerCaptcha'],
+                 possible_letter_duplicates_per_captcha: int = config['PossibleDuplicateLettersPerCaptcha'],
+                 processes_to_use: int = config['ProcessesPerCaptchaSolver']):
         self.letter_store: LetterStore = letter_store
         self.difference_calculator = DifferenceCalculator()
         self.possible_duplicates: int = possible_letter_duplicates_per_captcha

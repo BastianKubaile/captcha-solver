@@ -2,17 +2,20 @@ from numpy import ndarray, zeros, matmul, subtract, absolute, sum, identity, iin
 import numpy as np
 import bisect
 from typing import List, Tuple
-
+import yaml
 
 DifferencePositionList = List[Tuple[float, int]]
+
+config = yaml.safe_load(open("../config.yml"))
+
 
 class DifferenceCalculator:
 
     def __init__(self,
-                 margin_left: int = 0,
-                 margin_top: int = 0,
-                 margin_right: int = 0,
-                 margin_bottom: int = 0):
+                 margin_left: int = config['MarginLeft'],
+                 margin_top: int = config['MarginTop'],
+                 margin_right: int = config['MarginRight'],
+                 margin_bottom: int = config['MarginBottom']):
         self.margin_left = margin_left
         self.margin_top = margin_top
         self.margin_right = margin_right
@@ -69,9 +72,11 @@ class DifferenceCalculator:
 
         return positions_to_return
 
-    def _calculate_difference(self, masked_captcha_image: ndarray, normalized_letter_image: ndarray, letter_width: int, letter_height: int, data_type):
+    @staticmethod
+    def _calculate_difference(masked_captcha_image: ndarray, normalized_letter_image: ndarray,
+                              denormalized_letter_width: int, denormalized_letter_height: int, data_type):
         max_data_value = iinfo(data_type).max
-        max_possible_difference = max_data_value * letter_width * letter_height
+        max_possible_difference = max_data_value * denormalized_letter_width * denormalized_letter_height
 
         max_pixel_values = np.maximum(masked_captcha_image, normalized_letter_image)
         min_pixel_values = np.minimum(masked_captcha_image, normalized_letter_image)

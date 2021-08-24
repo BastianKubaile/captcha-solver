@@ -1,0 +1,15 @@
+# [Captcha Characteristics]
+LettersPerCaptcha: 6
+PossibleDuplicateLettersPerCaptcha: 2 # how often may the same letter occur in a captcha
+
+# [Multiprocessing]
+ProcessesPerCaptchaSolver: 4 # how many processes are used to calculate the solution of one captcha
+ProcessesPerServer: 2 # how many processes are used to answer HTTP requests
+
+# [Heuristics for Optimisation]
+# These margins mark the areas of the Captcha image that are ignored by the algorithm.
+# Letters are only fitted on the area outside the margin. The bigger the margin, the faster the calculation.
+MarginTop: 0
+MarginRight: 0
+MarginBottom: 0
+MarginLeft: 0
