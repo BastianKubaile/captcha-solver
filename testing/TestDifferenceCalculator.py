@@ -13,6 +13,7 @@ letter_paths = [
 expected_offsets_for_letters = [18, 57, 92, 137, 166, 209]
 maximum_expected_offset = 0.1
 
+
 def test_finds_correct_offsets_for_first_captcha():
     under_test = DifferenceCalculator(0, 0, 0, 0)
     captcha = read_image(captcha_path)
