@@ -11,7 +11,7 @@ letter_paths = [
     "data/letters/K/withSerif.jpeg"
 ]
 expected_offsets_for_letters = [18, 57, 92, 137, 166, 209]
-maximum_expected_offset = 0.1
+maximum_expected_difference = 0.1
 
 
 def test_finds_correct_offsets_for_first_captcha():
@@ -24,4 +24,4 @@ def test_finds_correct_offsets_for_first_captcha():
         smallest_difference = under_test.get_differences(captcha, letter)[0]
         actual_difference, actual_offset = smallest_difference[0], smallest_difference[1]
         assert expected_offset == actual_offset
-        assert actual_difference < maximum_expected_offset
+        assert actual_difference < maximum_expected_difference
