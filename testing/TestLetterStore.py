@@ -2,7 +2,7 @@ from os import listdir
 import pytest
 from src.LetterStore import LetterStore
 
-letter_directory = "data/letters"
+letter_directory = "testing/data/letters"
 
 
 def test_gets_all_files():

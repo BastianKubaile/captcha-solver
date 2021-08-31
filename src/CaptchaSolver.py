@@ -7,7 +7,7 @@ from typing import List, Tuple, Dict
 from ctypes import Structure, c_float, c_int, c_char
 import yaml
 
-config = yaml.safe_load(open("../config.yml"))
+config = yaml.safe_load(open("config.yml"))
 
 LetterFit = Tuple[float, int, str]
 

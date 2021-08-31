@@ -6,7 +6,7 @@ import yaml
 
 DifferencePositionList = List[Tuple[float, int]]
 
-config = yaml.safe_load(open("../config.yml"))
+config = yaml.safe_load(open("config.yml"))
 
 
 class DifferenceCalculator:

@@ -1,6 +1,6 @@
 from src.ImageReader import read_image
 
-test_image_path = "data/50x50_white_with_black_pixel_at_6_10.jpeg"
+test_image_path = "testing/data/50x50_white_with_black_pixel_at_6_10.jpeg"
 test_image_shape = (50, 50)
 test_image_background_color = 255
 test_image_pixel_color = 0

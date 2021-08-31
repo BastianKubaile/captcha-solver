@@ -2,11 +2,10 @@ import os
 import pytest
 
 if __name__ == "__main__":
-    os.chdir("testing")
     pytest.main([
-        "TestCaptchaSolver.py",
-        "TestDifferenceCalculator.py",
-        "TestImageReader.py",
-        "TestLetterStore.py"
+        "testing/TestCaptchaSolver.py",
+        "testing/TestDifferenceCalculator.py",
+        "testing/TestImageReader.py",
+        "testing/TestLetterStore.py"
     ])
 

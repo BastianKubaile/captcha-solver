@@ -1,14 +1,14 @@
 from src.DifferenceCalculator import DifferenceCalculator
 from src.ImageReader import read_image
 
-captcha_path = "data/captchas/captcha1.jpeg"
+captcha_path = "testing/data/captchas/captcha1.jpeg"
 letter_paths = [
-    "data/letters/P/noSerif.jpeg",
-    "data/letters/6/noSerif.jpeg",
-    "data/letters/Z/withSerif.jpeg",
-    "data/letters/N/noSerif.jpeg",
-    "data/letters/E/noSerif.jpeg",
-    "data/letters/K/withSerif.jpeg"
+    "testing/data/letters/P/noSerif.jpeg",
+    "testing/data/letters/6/noSerif.jpeg",
+    "testing/data/letters/Z/withSerif.jpeg",
+    "testing/data/letters/N/noSerif.jpeg",
+    "testing/data/letters/E/noSerif.jpeg",
+    "testing/data/letters/K/withSerif.jpeg"
 ]
 expected_offsets_for_letters = [18, 57, 92, 137, 166, 209]
 maximum_expected_difference = 0.1
