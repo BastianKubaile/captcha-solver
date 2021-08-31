@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 from flask_caching import Cache
 from uuid import uuid1
 from os import system
@@ -23,18 +23,20 @@ cache = Cache(config={
 })
 cache.init_app(app)
 
+
 @cache.cached(key_prefix= "captcha_solver")
 def get_captcha_solver():
     letter_store = LetterStore(letter_dir_path)
     return CaptchaSolver(letter_store)
 
+
 @app.route("/solve", methods=['POST'])
 def solve():
     if image_field_name not in request.files:
-        pass  # TODO: Give some error message
+        return Response("The request doesn't contain a file. \n", status=400)
     received_file = request.files[image_field_name]
     if not received_file:  # TODO: Check if file is of image type
-        pass  # TODO: Give some error message
+        return Response("The sent file isn't of the correct type. \n", status=400)
 
     saved_path = f"{upload_directory}/{uuid1()}.jpeg"
     image_file = open(saved_path, 'wb')
@@ -43,7 +45,7 @@ def solve():
 
     captcha_image = read_image(saved_path)
     if not captcha_is_solvable(captcha_image):
-        pass  # TODO: Give some error message
+        return Response("The kind of captcha that was sent cannot be processed. \n", status=422)
     captcha_image = reformat_captcha(captcha_image)
 
     solved_text = get_captcha_solver().parse_image(captcha_image)
