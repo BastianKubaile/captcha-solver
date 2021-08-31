@@ -4,3 +4,4 @@ venv
 captcha_sovler.egg-info
 __pycache__/
 *.py[cod]
+uploaded_captchas

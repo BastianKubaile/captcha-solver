@@ -29,8 +29,7 @@ class CaptchaSolver:
         self.letters_per_captcha: int = letters_per_captcha
         self.processes_to_use: int = processes_to_use
 
-    def parse_image(self, img_path: str) -> str:
-        captcha_image = read_image(img_path)
+    def parse_image(self, captcha_image) -> str:
         n_relevant_positions = len(self.letter_store.get_letters()) * self.possible_duplicates
         most_relevant_positions = Array(LetterFitStructure, n_relevant_positions)
 
