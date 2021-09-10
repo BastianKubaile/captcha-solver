@@ -24,7 +24,7 @@ cache = Cache(config={
 cache.init_app(app)
 
 
-@cache.cached(key_prefix= "captcha_solver")
+@cache.cached(key_prefix="captcha_solver")
 def get_captcha_solver():
     letter_store = LetterStore(letter_dir_path)
     return CaptchaSolver(letter_store)
@@ -54,3 +54,5 @@ def solve():
     }
 
 
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port='8080')
